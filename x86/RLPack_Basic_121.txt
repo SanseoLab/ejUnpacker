@@ -1,0 +1,25 @@
+// script by SanseoLab
+// RLPack Basic v1.21
+// Including "aPLib 0.43" & "LZMA 4.30" options
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+bphws csp,r
+erun
+bphwc
+sti
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret

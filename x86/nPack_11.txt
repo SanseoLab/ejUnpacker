@@ -1,0 +1,32 @@
+// script by SanseoLab
+// nPack v1.1.800.2008
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Find OEP jump
+find cip,"0105????????FF35????????C3"
+log "found: {0}", $result+c
+cmp $result,0
+je error
+
+// Go to OEP
+bp $result+c
+erun
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+
+error:
+msg "Didn't find Pattern"
+ret

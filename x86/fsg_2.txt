@@ -1,0 +1,33 @@
+// script by _pusher_ ( https://github.com/x64dbg/Scripts/blob/master/FSG2.0.txt )
+// edited by SanseoLab
+// FSG v2.0
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Find OEP Jump
+find cip,"FF630C"
+log "Found: {0}", $result
+cmp $result,0
+je error
+log "Found Address of OEP jmp Pattern: {0}", $result+1
+
+// Go to OEP
+bp $result
+erun
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+error:
+msg "Didn't find OEP jump"
+ret

@@ -1,0 +1,26 @@
+// script by SanseoLab
+// MEW11 SE v1.2
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+sti
+sti
+sti
+sti
+bph cax
+erun
+bphwc
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret

@@ -1,0 +1,46 @@
+// script by _pusher_ ( https://github.com/x64dbg/Scripts/blob/master/FSG1.x1.3x.txt )
+// edited by SanseoLab
+// FSG v1.0 v1.1 v1.31 v1.33
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Find First Pattern
+find cip,"EB09FE??0F84"
+cmp $result,0
+je error
+log "Found First Pattern: {0}", $result+4
+$result2 = $result+6
+
+// Go to First Pattern
+bp $result+4
+erun
+
+// Clear breakpoints
+bc
+
+// Find OEP Address
+log "Jmp to OEP: {0}", $result2
+$dw = 4:[$result2]
+log "Indirect Address: {0}", $dw
+$dest = $result2 + $dw + 6
+log "Address of OEP: {0}", $dest
+
+// Go to OEP
+bp $dest
+erun
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+error:
+msg "Didn't find Pattern"
+ret

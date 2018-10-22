@@ -1,0 +1,27 @@
+// script by SanseoLab
+// Petite v2.4
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+sti
+bphws csp,r
+erun
+bphwc
+sti
+sti
+bp cdx
+erun
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret

@@ -1,0 +1,24 @@
+// script by SanseoLab
+// WinUpack v0.39
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+sti
+sti
+bphws csp,r
+erun
+bphwc
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret

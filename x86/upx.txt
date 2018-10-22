@@ -1,0 +1,39 @@
+// script by mrexodia ( https://github.com/x64dbg/Scripts/blob/master/upx391.txt )
+// edited by SanseoLab
+// UPX v2.xx - v3.xx
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+bphws csp,r
+erun
+bphwc
+
+// Find OEP jump
+find cip,"80E9"
+log "Found: {0}", $result
+cmp $result,0
+je error
+log "Found Address of OEP jmp Pattern: {0}", $result+1
+
+// Go to OEP
+bp $result+1
+erun
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+error:
+msg "Didn't find OEP jump"
+ret

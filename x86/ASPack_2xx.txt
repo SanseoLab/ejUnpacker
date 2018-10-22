@@ -1,0 +1,25 @@
+// script by SanseoLab
+// ASPack v2.xx
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+sti
+bphws csp,r
+erun
+bphwc
+
+// Go to OEP
+sti
+sti
+sti
+sti
+
+// Finish script
+ret

@@ -1,0 +1,36 @@
+// script by SanseoLab
+// UPX v3.91 - 
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Script start
+step
+bphws csp,r
+erun
+bphwc
+
+// Find OEP jump
+find cip,"80E9"
+cmp $result,0
+je error
+
+// Go to OEP
+bp $result+1
+erun
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+error:
+msg "Didn't find OEP jump"
+ret

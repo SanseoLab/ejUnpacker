@@ -1,0 +1,51 @@
+// script by SanseoLab
+// Kkrunchy v0.23a2
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Find First Pattern
+find cip,"66AD50EB??5DC3"
+log "Found Pattern: {0}", $result+6
+cmp $result,0
+je error
+
+// Go to First Pattern
+bp $result+6
+erun
+bc
+sti
+
+// Find OEP jump
+find cip,"8775003B75000F84"
+log "found: {0}", $result+6
+cmp $result,0
+je error
+
+// Calculate OEP
+$result2 = $result+8
+log "result2: {0}", $result2
+$dw = 4:[$result2]
+log "dw: {0}", $dw
+$dest = $result2 + $dw + 6
+log "OEP: {0}", $dest
+
+// Go to OEP
+bph $dest
+erun
+
+// Clear breakpoints
+bphwc
+
+// Finish script
+ret
+
+
+error:
+msg "Didn't find Pattern"
+ret

@@ -1,0 +1,54 @@
+// script by _pusher_ ( https://github.com/x64dbg/Scripts/blob/master/Mpress2xx.txt )
+// edited by SanseoLab
+// MPress v2.xx
+
+
+// If you set "System Breakpoint" option.
+run
+
+// Clear breakpoints
+bc
+bphwc
+
+// Find First Pattern
+find cip,"83C47C5B5E5F5DC3E9"
+cmp $result,0
+jnz AllOK
+find cip,"8B45F85EC9C20400E9"
+cmp $result,0
+jnz AllOK
+jmp error1
+
+AllOK:
+log "Found Pattern: {0}", $result+8
+bp $result+8
+erun
+bc
+sti
+
+// Find OEP jump
+find cip,"AAB8?E010000AB61E9"
+log "Found OEP jump: {0}", $result+8
+cmp $result,0
+je error2
+bc
+
+// Go to OEP
+bp $result+8
+erun
+sti
+
+// Clear breakpoints
+bc
+
+// Finish script
+ret
+
+
+error1:
+msg "Didn't find Pattern"
+ret
+
+error2:
+msg "Didn't find OEP jump"
+ret
